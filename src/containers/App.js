@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
-import Person from '../components/Persons/Person/Person';
-import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -40,30 +40,14 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let buttonClass = '';
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => 
-            <ErrorBoundary key={person.id}>
-              <Person name={person.name} 
-                      age={person.age} 
-                      click={() => this.deletePersonHandler(index)} 
-                      changed={(event) => this.changedName(event, person.id)}
-              />
-            </ErrorBoundary>)}
-        </div>
-      );
-
-      buttonClass = classes.Clicked;
+      persons = <Persons persons={this.state.persons} click={this.deletePersonHandler} changed={this.changedName}/>;
     };
 
     return (
       <div className={classes.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
-        <button className={buttonClass} onClick={this.togglePersons}>Toggle Persons</button>
+        <Cockpit showPersons={this.state.showPersons} togglePersons={this.togglePersons}/>
         {persons}
       </div>
     );
