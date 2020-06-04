@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.module.css';
 import Person from './Person/Person'
-import styled from 'styled-components';
-
-const StyledButtonComponent = styled.button`
-  background-color: ${props => props.alt ? 'green' : 'red'};
-  color: white;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${props => props.alt ? 'lightgreen' : 'salmon'};
-    color: black;
-  }
-`;
 
 class App extends Component {
   state = {
@@ -50,17 +38,8 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
-
     let persons = null;
+    let buttonClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -73,20 +52,16 @@ class App extends Component {
                     changed={(event) => this.changedName(event, person.id)}
                     />)}
         </div>
-      )
+      );
 
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
-    }
+      buttonClass = classes.Clicked;
+    };
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <StyledButtonComponent alt={!this.state.showPersons} onClick={this.togglePersons}>Toggle Persons</StyledButtonComponent>
+        <button className={buttonClass} onClick={this.togglePersons}>Toggle Persons</button>
         {persons}
       </div>
     );
