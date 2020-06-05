@@ -9,7 +9,7 @@ const cockpit = props => {
 
     return (
         <div className={classes.Cockpit}>
-            <h1>Hi, I'm a React App</h1>
+            <h1>Hi, I'm a {props.title} App</h1>
             <p>This is really working!</p>
             <button className={buttonClass} onClick={props.togglePersons}>Toggle Persons</button>
         </div>
