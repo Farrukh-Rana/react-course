@@ -1,6 +1,6 @@
 import React from 'react';
 import Person from './Person/Person';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from '../../hoc/ErrorBoundary';
 
 const persons = props => {
     return (
