@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import classes from './Person.module.css';
+import withClass from '../../../hoc/withClass';
 
 const person = (props) => {
     return (
-        <div className={classes.Person}>
+        <Fragment>
             <p onClick={props.click}>user-defined component with actual name: {props.name} and age: {props.age} <b>{props.children}</b></p>
             <input onChange={props.changed} value={props.name}/>
-        </div>
+        </Fragment>
     );
 };
 
-export default person;
+export default withClass(person, classes.Person);
