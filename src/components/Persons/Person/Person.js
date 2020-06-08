@@ -1,13 +1,19 @@
-import React, { Fragment } from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { Fragment, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classes from './Person.module.css';
 import withClass from '../../../hoc/withClass';
 
-const person = (props) => {
+const person = props => {
+    const focusInputRef = useRef(null);
+    useEffect(() => {
+        focusInputRef.current.focus();
+    }, []);
+
     return (
         <Fragment>
             <p onClick={props.click}>user-defined component with actual name: {props.name} and age: {props.age} <b>{props.children}</b></p>
-            <input onChange={props.changed} value={props.name}/>
+            <input ref={focusInputRef} onChange={props.changed} value={props.name}/>
         </Fragment>
     );
 };
