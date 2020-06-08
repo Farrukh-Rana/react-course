@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import classes from './Person.module.css';
 import withClass from '../../../hoc/withClass';
 
@@ -10,5 +11,12 @@ const person = (props) => {
         </Fragment>
     );
 };
+
+person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
 
 export default withClass(person, classes.Person);
