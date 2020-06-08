@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
   state = {
@@ -10,7 +12,8 @@ class App extends Component {
       { id: 'asdasd123', name: 'Manu', age: 29 },
       { id: 'asdasd6875', name: 'Stephanie', age: 26 }
     ],
-    showPersons: false
+    showPersons: false,
+    authenticated: false
   };
 
   changedName = (event, id) => {
@@ -38,6 +41,14 @@ class App extends Component {
     });
   }
 
+  loginHandler = () => {
+    this.setState((prevState, props) => {
+      return {
+        authenticated: !prevState.authenticated
+      };
+    });
+  }
+
   render() {
     let persons = null;
 
@@ -47,8 +58,10 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit title={this.props.appTitle} showPersons={this.state.showPersons} togglePersons={this.togglePersons}/>
-        {persons}
+        <AuthContext.Provider value={{authenticated: this.state.authenticated, login: this.loginHandler}}>
+          <Cockpit title={this.props.appTitle} showPersons={this.state.showPersons} togglePersons={this.togglePersons}/>
+          {persons}
+        </AuthContext.Provider>
       </div>
     );
   }
